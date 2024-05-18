@@ -9,6 +9,11 @@ namespace Trabajo_Alquiler
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddDbContext<AlquilerContext>(options =>
+               options.UseSqlServer(builder.Configuration.GetConnectionString("SupermarketDB")));
+
+            
+
             // Add services to the container.
             builder.Services.AddRazorPages();
 
@@ -18,12 +23,7 @@ namespace Trabajo_Alquiler
                 options.LoginPath = "/Account/Login";
             });
 
-            builder.Services.AddDbContext<AlquilerContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("Trabajo_Alquiler"))
-            );
-            /*builder.Services.AddDbContext<autContex>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("SupermarketDB"))
-            );*/
+            
 
             var app = builder.Build();
 

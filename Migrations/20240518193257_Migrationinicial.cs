@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Trabajo_Alquiler.Migrations
 {
     /// <inheritdoc />
-    public partial class Alquiler : Migration
+    public partial class Migrationinicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,17 +15,17 @@ namespace Trabajo_Alquiler.Migrations
                 name: "Propiedades",
                 columns: table => new
                 {
-                    Idpropiedad = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Direccion = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Tipo_propiedad = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    No_habitaciones = table.Column<int>(type: "int", nullable: false),
-                    Precio_alquiler = table.Column<decimal>(type: "decimal(6,2)", nullable: false),
-                    Disponible = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Direccion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TipoPropiedad = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NumeroHabitaciones = table.Column<int>(type: "int", nullable: false),
+                    PrecioAlquiler = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
+                    Disponible = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Propiedades", x => x.Idpropiedad);
+                    table.PrimaryKey("PK_Propiedades", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -46,22 +46,22 @@ namespace Trabajo_Alquiler.Migrations
                 name: "Inquilinos",
                 columns: table => new
                 {
-                    Idinquilino = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Apellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefono = table.Column<int>(type: "int", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PropiedadesId = table.Column<int>(type: "int", nullable: false)
+                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PropiedadId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inquilinos", x => x.Idinquilino);
+                    table.PrimaryKey("PK_Inquilinos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Inquilinos_Propiedades_PropiedadesId",
-                        column: x => x.PropiedadesId,
+                        name: "FK_Inquilinos_Propiedades_PropiedadId",
+                        column: x => x.PropiedadId,
                         principalTable: "Propiedades",
-                        principalColumn: "Idpropiedad",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -69,73 +69,73 @@ namespace Trabajo_Alquiler.Migrations
                 name: "Contratos",
                 columns: table => new
                 {
-                    Idcontrato = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Fecha_Inicio = table.Column<DateTime>(type: "date", nullable: false),
-                    Fecha_Fin = table.Column<DateTime>(type: "date", nullable: false),
-                    Deposito = table.Column<decimal>(type: "decimal(6,2)", nullable: false),
-                    Terminos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PropiedadesId = table.Column<int>(type: "int", nullable: false),
-                    InquilinosId = table.Column<int>(type: "int", nullable: false)
+                    PropiedadId = table.Column<int>(type: "int", nullable: false),
+                    InquilinoId = table.Column<int>(type: "int", nullable: false),
+                    FechaInicio = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FechaFin = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Deposito = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
+                    Terminos = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Contratos", x => x.Idcontrato);
+                    table.PrimaryKey("PK_Contratos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Contratos_Inquilinos_InquilinosId",
-                        column: x => x.InquilinosId,
+                        name: "FK_Contratos_Inquilinos_InquilinoId",
+                        column: x => x.InquilinoId,
                         principalTable: "Inquilinos",
-                        principalColumn: "Idinquilino",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
-                        name: "FK_Contratos_Propiedades_PropiedadesId",
-                        column: x => x.PropiedadesId,
+                        name: "FK_Contratos_Propiedades_PropiedadId",
+                        column: x => x.PropiedadId,
                         principalTable: "Propiedades",
-                        principalColumn: "Idpropiedad",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Pagos",
                 columns: table => new
                 {
-                    Idpago = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Fecha_Pago = table.Column<DateTime>(type: "date", nullable: false),
-                    Monto = table.Column<decimal>(type: "decimal(6,2)", nullable: false),
-                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ContratosId = table.Column<int>(type: "int", nullable: false)
+                    ContratoId = table.Column<int>(type: "int", nullable: false),
+                    FechaPago = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Monto = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
+                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pagos", x => x.Idpago);
+                    table.PrimaryKey("PK_Pagos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Pagos_Contratos_ContratosId",
-                        column: x => x.ContratosId,
+                        name: "FK_Pagos_Contratos_ContratoId",
+                        column: x => x.ContratoId,
                         principalTable: "Contratos",
-                        principalColumn: "Idcontrato",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Contratos_InquilinosId",
+                name: "IX_Contratos_InquilinoId",
                 table: "Contratos",
-                column: "InquilinosId");
+                column: "InquilinoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Contratos_PropiedadesId",
+                name: "IX_Contratos_PropiedadId",
                 table: "Contratos",
-                column: "PropiedadesId");
+                column: "PropiedadId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inquilinos_PropiedadesId",
+                name: "IX_Inquilinos_PropiedadId",
                 table: "Inquilinos",
-                column: "PropiedadesId");
+                column: "PropiedadId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pagos_ContratosId",
+                name: "IX_Pagos_ContratoId",
                 table: "Pagos",
-                column: "ContratosId");
+                column: "ContratoId");
         }
 
         /// <inheritdoc />
