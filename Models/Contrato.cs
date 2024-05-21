@@ -8,12 +8,12 @@ namespace Trabajo_Alquiler.Models
         [Key]
         public int Id { get; set; }
         public int PropiedadId { get; set; }
-        public Propiedad Propiedad { get; set; }
-
+        public Propiedad? Propiedad { get; set; }
         public int InquilinoId { get; set; }
-        public Inquilino Inquilino { get; set; }
-        
+        public Inquilino? Inquilino { get; set; }
+        [Column(TypeName = "date")]
         public DateTime FechaInicio { get; set; }
+        [Column(TypeName = "date")]
         public DateTime FechaFin { get; set; }
         [Column(TypeName = "decimal(8,2)")]
         public decimal Deposito { get; set; }

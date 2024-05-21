@@ -13,6 +13,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Inquilinos[0].Id)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Inquilinos[0].Nombre)
             </th>
             <th>
@@ -35,6 +38,9 @@
         @foreach (var item in Model.Inquilinos)
         {
             <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Nombre)
                 </td>

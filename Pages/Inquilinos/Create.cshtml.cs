@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Trabajo_Alquiler.Data;
 using Trabajo_Alquiler.Models;
 
@@ -15,6 +16,7 @@ namespace Trabajo_Alquiler.Pages.Inquilinos
         }
         public IActionResult OnGet()
         {
+            ViewData["PropiedadId"] = new SelectList(_context.Propiedades, "Id", "Id");
             return Page();
         }
 
@@ -25,6 +27,7 @@ namespace Trabajo_Alquiler.Pages.Inquilinos
         {
             if (!ModelState.IsValid || _context.Inquilinos == null || Inquilino == null)
             {
+                ViewData["PropiedadId"] = new SelectList(_context.Propiedades, "Id", "Id");
                 return Page();
             }
 

@@ -1,0 +1,73 @@
+﻿@page
+@model Trabajo_Alquiler.Pages.Contratos.IndexModel
+@{
+    ViewData["Tittle"] = "Index Contratos";
+}
+<h1>Index Contratos</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-success">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Contratos[0].Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contratos[0].PropiedadId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contratos[0].InquilinoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contratos[0].FechaInicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contratos[0].FechaFin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contratos[0].Deposito)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contratos[0].Terminos)
+            </th>
+
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Contratos)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PropiedadId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InquilinoId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaInicio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaFin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Deposito)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Terminos)
+                </td>
+
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                    <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

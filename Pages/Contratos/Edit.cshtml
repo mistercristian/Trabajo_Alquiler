@@ -1,0 +1,59 @@
+﻿@page
+@model Trabajo_Alquiler.Pages.Contratos.EditModel
+@{
+    ViewData["Tittle"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Contrato</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Contrato.Id" />
+            <div class="form-group">
+                <label asp-for="Contrato.PropiedadId" class="control-label"></label>
+                <input asp-for="Contrato.PropiedadId" class="form-control" />
+                <span asp-validation-for="Contrato.PropiedadId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Contrato.InquilinoId" class="control-label"></label>
+                <input asp-for="Contrato.InquilinoId" class="form-control" />
+                <span asp-validation-for="Contrato.InquilinoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Contrato.FechaInicio" class="control-label"></label>
+                <input asp-for="Contrato.FechaInicio" class="form-control" />
+                <span asp-validation-for="Contrato.FechaInicio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Contrato.FechaFin" class="control-label"></label>
+                <input asp-for="Contrato.FechaFin" class="form-control" />
+                <span asp-validation-for="Contrato.FechaFin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Contrato.Deposito" class="control-label"></label>
+                <input asp-for="Contrato.Deposito" class="form-control" />
+                <span asp-validation-for="Contrato.Deposito" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Contrato.Terminos" class="control-label"></label>
+                <input asp-for="Contrato.Terminos" class="form-control" />
+                <span asp-validation-for="Contrato.Terminos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-success" />
+                <a asp-page="./Index" class="btn btn-primary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

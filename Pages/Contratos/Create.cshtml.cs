@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Trabajo_Alquiler.Data;
 using Trabajo_Alquiler.Models;
 
-namespace Trabajo_Alquiler.Pages.Pagos
+namespace Trabajo_Alquiler.Pages.Contratos
 {
     public class CreateModel : PageModel
     {
@@ -14,27 +14,32 @@ namespace Trabajo_Alquiler.Pages.Pagos
 
             _context = context;
         }
-
+       
         public IActionResult OnGet()
         {
-            ViewData["ContratoId"] = new SelectList(_context.Contratos, "Id", "Id");
+            ViewData["InquilinoId"] = new SelectList(_context.Inquilinos, "Id", "Nombre");
+            ViewData["PropiedadId"] = new SelectList(_context.Propiedades, "Id", "Id");
             return Page();
+
+            
         }
 
         [BindProperty]
-        public Pago Pago { get; set; } = default!;
+        public Contrato Contrato { get; set; } = default!;
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid || _context.Pagos == null || Pago == null)
+            if (!ModelState.IsValid || _context.Contratos == null || Contrato == null)
             {
-                ViewData["ContratoId"] = new SelectList(_context.Contratos, "Id", "Id");
+                ViewData["InquilinoId"] = new SelectList(_context.Inquilinos, "Id");
+                ViewData["PropiedadId"] = new SelectList(_context.Propiedades, "Id", "Id");
                 return Page();
             }
-            _context.Pagos.Add(Pago);
+            _context.Contratos.Add(Contrato);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }
     }
 }
+
