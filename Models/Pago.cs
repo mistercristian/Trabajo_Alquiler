@@ -8,7 +8,7 @@ namespace Trabajo_Alquiler.Models
         [Key]
         public int Id { get; set; }
         public int ContratoId { get; set; }
-        public Contrato Contrato { get; set; }
+        public Contrato? Contrato { get; set; }
 
         public DateTime FechaPago { get; set; }
         [Column(TypeName = "decimal(8,2)")]

@@ -8,11 +8,12 @@ namespace Trabajo_Alquiler.Pages.Propiedades
     public class CreateModel : PageModel
     {
         private readonly AlquilerContext _context;
-
         public CreateModel(AlquilerContext context)
         {
+            
             _context = context;
         }
+
         public IActionResult OnGet()
         {
             return Page();
@@ -27,7 +28,6 @@ namespace Trabajo_Alquiler.Pages.Propiedades
             {
                 return Page();
             }
-
             _context.Propiedades.Add(Propiedad);
             await _context.SaveChangesAsync();
 

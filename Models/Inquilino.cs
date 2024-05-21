@@ -15,8 +15,8 @@ namespace Trabajo_Alquiler.Models
         public string Email { get; set; }
 
         public int PropiedadId { get; set; }
-        public Propiedad Propiedad { get; set; }
-        public ICollection<Contrato> Contratos { get; set; }
+        public Propiedad? Propiedad { get; set; }
+        public ICollection<Contrato>? Contratos { get; set; }
 
 
     }

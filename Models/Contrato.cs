@@ -19,7 +19,7 @@ namespace Trabajo_Alquiler.Models
         public decimal Deposito { get; set; }
         public string Terminos { get; set; }
 
-        public ICollection<Pago> Pagos { get; set; }
+        public ICollection<Pago>? Pagos { get; set; }
 
 
     }

@@ -12,6 +12,8 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+           
             
             <div class="form-group">
                 <label asp-for="Propiedad.Direccion" class="control-label"></label>
@@ -44,9 +46,9 @@
                     <option value="false">NO</option>
                 </select>
                 <span asp-validation-for="Propiedad.Disponible" class="text-danger"></span>
-            </div>
+            </div> 
 
-            <div class="form-group mt-3">
+             <div class="form-group mt-3">
                 <input type="submit" value="Create" class="btn btn-succes" />
                 <a asp-page="Index" class="btn btn-primary">Back to List</a>
             </div>
