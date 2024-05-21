@@ -10,6 +10,7 @@ namespace Trabajo_Alquiler.Models
         public int ContratoId { get; set; }
         public Contrato? Contrato { get; set; }
 
+        [Column(TypeName = "date")]
         public DateTime FechaPago { get; set; }
         [Column(TypeName = "decimal(8,2)")]
         public decimal Monto { get; set; }
