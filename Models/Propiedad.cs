@@ -7,8 +7,8 @@ namespace Trabajo_Alquiler.Models
     {
         [Key]
         public int Id { get; set; }
-        public string Direccion { get; set; }
-        public string TipoPropiedad { get; set; }
+        public string? Direccion { get; set; }
+        public string? TipoPropiedad { get; set; }
         public int NumeroHabitaciones { get; set; }
         [Column(TypeName = "decimal(8,2)")]
         public decimal PrecioAlquiler { get; set; }
