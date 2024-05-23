@@ -24,124 +24,128 @@ namespace Trabajo_Alquiler.Migrations
 
             modelBuilder.Entity("Trabajo_Alquiler.Models.Contrato", b =>
                 {
-                    b.Property<int>("Idcontrato")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Idcontrato"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<decimal>("Deposito")
-                        .HasColumnType("decimal(6,2)");
+                        .HasColumnType("decimal(8,2)");
 
-                    b.Property<DateTime>("Fecha_Fin")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("FechaFin")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Fecha_Inicio")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("FechaInicio")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int>("InquilinosId")
+                    b.Property<int>("InquilinoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PropiedadesId")
+                    b.Property<int>("PropiedadId")
                         .HasColumnType("int");
 
                     b.Property<string>("Terminos")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Idcontrato");
+                    b.HasKey("Id");
 
-                    b.HasIndex("InquilinosId");
+                    b.HasIndex("InquilinoId");
 
-                    b.HasIndex("PropiedadesId");
+                    b.HasIndex("PropiedadId");
 
                     b.ToTable("Contratos");
                 });
 
             modelBuilder.Entity("Trabajo_Alquiler.Models.Inquilino", b =>
                 {
-                    b.Property<int>("Idinquilino")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Idinquilino"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Apellido")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PropiedadesId")
+                    b.Property<int>("PropiedadId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Telefono")
-                        .HasColumnType("int");
+                    b.Property<string>("Telefono")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Idinquilino");
+                    b.HasKey("Id");
 
-                    b.HasIndex("PropiedadesId");
+                    b.HasIndex("PropiedadId");
 
                     b.ToTable("Inquilinos");
                 });
 
             modelBuilder.Entity("Trabajo_Alquiler.Models.Pago", b =>
                 {
-                    b.Property<int>("Idpago")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Idpago"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ContratosId")
+                    b.Property<int>("ContratoId")
                         .HasColumnType("int");
 
                     b.Property<string>("Estado")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Fecha_Pago")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("FechaPago")
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal>("Monto")
-                        .HasColumnType("decimal(6,2)");
+                        .HasColumnType("decimal(8,2)");
 
-                    b.HasKey("Idpago");
+                    b.HasKey("Id");
 
-                    b.HasIndex("ContratosId");
+                    b.HasIndex("ContratoId");
 
                     b.ToTable("Pagos");
                 });
 
             modelBuilder.Entity("Trabajo_Alquiler.Models.Propiedad", b =>
                 {
-                    b.Property<int>("Idpropiedad")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Idpropiedad"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Direccion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Disponible")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("No_habitaciones")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Precio_alquiler")
-                        .HasColumnType("decimal(6,2)");
-
-                    b.Property<string>("Tipo_propiedad")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Idpropiedad");
+                    b.Property<bool>("Disponible")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("NumeroHabitaciones")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("PrecioAlquiler")
+                        .HasColumnType("decimal(8,2)");
+
+                    b.Property<string>("TipoPropiedad")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Propiedades");
                 });
@@ -169,43 +173,60 @@ namespace Trabajo_Alquiler.Migrations
 
             modelBuilder.Entity("Trabajo_Alquiler.Models.Contrato", b =>
                 {
-                    b.HasOne("Trabajo_Alquiler.Models.Inquilino", "Inquilinos")
-                        .WithMany()
-                        .HasForeignKey("InquilinosId")
+                    b.HasOne("Trabajo_Alquiler.Models.Inquilino", "Inquilino")
+                        .WithMany("Contratos")
+                        .HasForeignKey("InquilinoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Trabajo_Alquiler.Models.Propiedad", "Propiedades")
-                        .WithMany()
-                        .HasForeignKey("PropiedadesId")
+                    b.HasOne("Trabajo_Alquiler.Models.Propiedad", "Propiedad")
+                        .WithMany("Contratos")
+                        .HasForeignKey("PropiedadId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Inquilinos");
+                    b.Navigation("Inquilino");
 
-                    b.Navigation("Propiedades");
+                    b.Navigation("Propiedad");
                 });
 
             modelBuilder.Entity("Trabajo_Alquiler.Models.Inquilino", b =>
                 {
-                    b.HasOne("Trabajo_Alquiler.Models.Propiedad", "Propiedades")
-                        .WithMany()
-                        .HasForeignKey("PropiedadesId")
+                    b.HasOne("Trabajo_Alquiler.Models.Propiedad", "Propiedad")
+                        .WithMany("Inquilinos")
+                        .HasForeignKey("PropiedadId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Propiedades");
+                    b.Navigation("Propiedad");
                 });
 
             modelBuilder.Entity("Trabajo_Alquiler.Models.Pago", b =>
                 {
-                    b.HasOne("Trabajo_Alquiler.Models.Contrato", "Contratos")
-                        .WithMany()
-                        .HasForeignKey("ContratosId")
+                    b.HasOne("Trabajo_Alquiler.Models.Contrato", "Contrato")
+                        .WithMany("Pagos")
+                        .HasForeignKey("ContratoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Contrato");
+                });
+
+            modelBuilder.Entity("Trabajo_Alquiler.Models.Contrato", b =>
+                {
+                    b.Navigation("Pagos");
+                });
+
+            modelBuilder.Entity("Trabajo_Alquiler.Models.Inquilino", b =>
+                {
                     b.Navigation("Contratos");
+                });
+
+            modelBuilder.Entity("Trabajo_Alquiler.Models.Propiedad", b =>
+                {
+                    b.Navigation("Contratos");
+
+                    b.Navigation("Inquilinos");
                 });
 #pragma warning restore 612, 618
         }

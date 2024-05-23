@@ -1,0 +1,63 @@
+﻿@page
+@model Trabajo_Alquiler.Pages.Pagos.IndexModel
+@{
+    ViewData["Tittle"] = "Index Pagos";
+}
+<h1>Index Pagos</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-success">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Pagos[0].Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pagos[0].ContratoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pagos[0].FechaPago)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pagos[0].Monto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pagos[0].Estado)
+            </th>
+           
+
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Pagos)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContratoId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaPago)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Monto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+               
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                    <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
