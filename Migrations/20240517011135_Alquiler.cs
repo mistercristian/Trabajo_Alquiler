@@ -86,13 +86,13 @@ namespace Trabajo_Alquiler.Migrations
                         column: x => x.InquilinosId,
                         principalTable: "Inquilinos",
                         principalColumn: "Idinquilino",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Contratos_Propiedades_PropiedadesId",
                         column: x => x.PropiedadesId,
                         principalTable: "Propiedades",
                         principalColumn: "Idpropiedad",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
