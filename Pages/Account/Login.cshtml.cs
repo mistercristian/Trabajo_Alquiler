@@ -9,13 +9,12 @@ namespace Trabajo_Alquiler.Pages.Account
     {
         [BindProperty]
 
-        public string User {get; set; }
+        public User User {get; set; }
         public void OnGet()
         {
         }
 
-        public void OnPost() 
-        {
+        public void OnPost() {
             Console.WriteLine("User: " + User.Email + " Password: " + User.Password);
         }
     }
