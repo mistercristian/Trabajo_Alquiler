@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -6,7 +7,7 @@ using Trabajo_Alquiler.Models;
 
 namespace Trabajo_Alquiler.Pages.Pagos
 {
-    //[Authorize]
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly AlquilerContext _context;

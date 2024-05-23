@@ -7,7 +7,7 @@ using Trabajo_Alquiler.Models;
 
 namespace Trabajo_Alquiler.Pages.Users
 {
-   // [Authorize]
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly AlquilerContext _context;
